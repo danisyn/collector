@@ -23,9 +23,9 @@ type FileEvent struct {
 func main() {
 
 	fmt.Println("-- Syndeno collector is running --")
-	fmt.Println("-- This app collects events every 2 min --")
+	fmt.Println("-- This app collects events every 14 min --")
 
-	for range time.Tick(time.Minute * 2) {
+	for range time.Tick(time.Minute * 14) {
 		go func() {
 			_, inCluster := os.LookupEnv("KUBERNETES_SERVICE_HOST")
 
@@ -83,7 +83,7 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 		EventArray = []Event{}
 	}
 
-	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "-" + fmt.Sprint(time.Now().Hour()) + ":" + fmt.Sprint(time.Now().Minute()) + ":" + fmt.Sprint(time.Now().Second())
+	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "-" + fmt.Sprint(time.Now().Hour()) + "-" + fmt.Sprint(time.Now().Minute()) + "-" + fmt.Sprint(time.Now().Second())
 
 	fileName := "kubernetes-events-" + fileTime + ".log"
 
