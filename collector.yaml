@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
       - name: syndeno-collector
-        image: golang:latest
+        image: daniels7/collector:latest
         command: ["sleep", "infinity"]
         resources:
           limits:
