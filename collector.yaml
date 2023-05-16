@@ -4,6 +4,14 @@ metadata:
   name: syndeno-collector
 
 ---
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: collector
+  namespace: syndeno-collector
+
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
