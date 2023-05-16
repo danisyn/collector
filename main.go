@@ -23,9 +23,9 @@ type FileEvent struct {
 func main() {
 
 	fmt.Println("-- Syndeno collector is running --")
-	fmt.Println("-- This app collects events every 30 min --")
+	fmt.Println("-- This app collects events every 2 min --")
 
-	for range time.Tick(time.Minute * 30) {
+	for range time.Tick(time.Minute * 2) {
 		go func() {
 			_, inCluster := os.LookupEnv("KUBERNETES_SERVICE_HOST")
 
