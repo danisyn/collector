@@ -83,11 +83,11 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 		EventArray = []Event{}
 	}
 
-	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "/" + fmt.Sprint(time.Now().Hour()) + ":" + fmt.Sprint(time.Now().Minute()) + ":" + fmt.Sprint(time.Now().Second())
+	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "-" + fmt.Sprint(time.Now().Hour()) + ":" + fmt.Sprint(time.Now().Minute()) + ":" + fmt.Sprint(time.Now().Second())
 
 	fileName := "kubernetes-events-" + fileTime + ".log"
 
-	file, _ := os.Create(fileName)
+	file, _ := os.Create("/app/logs/" + fileName)
 
 	defer file.Close()
 
