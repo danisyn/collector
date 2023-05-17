@@ -8,16 +8,21 @@ import (
 	"k8s.io/client-go/rest"
 	"os"
 	"time"
+	"encoding/json"
 )
 
+type JSON struct {
+	Items []FileEvent `json:"Items"`
+}
+
 type Event struct {
-	Message   string
-	Timestamp time.Time
+	Message   string `json:"Message"`
+	Timestamp time.Time `json:"Timestamp"`
 }
 
 type FileEvent struct {
-	Namespace string
-	Events    []Event
+	Namespace string `json:"Namespace"`
+	Events    []Event `json:"Event"`
 }
 
 func main() {
@@ -83,6 +88,8 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 		EventArray = []Event{}
 	}
 
+	JSON, _ := json.Marshal(Array)
+
 	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "-" + fmt.Sprint(time.Now().Hour()) + "-" + fmt.Sprint(time.Now().Minute()) + "-" + fmt.Sprint(time.Now().Second())
 
 	fileName := "kubernetes-events-" + fileTime + ".log"
@@ -91,7 +98,7 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 
 	defer file.Close()
 
-	_, err := file.WriteString(fmt.Sprint(Array))
+	_, err := file.WriteString(fmt.Sprint(JSON))
 	if err != nil {
         fmt.Println(err)
     }
