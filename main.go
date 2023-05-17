@@ -58,7 +58,7 @@ func main() {
 			length := needsCompress()
 			
 			if length == 99 {
-				
+
 			}
 
 		}()
@@ -81,7 +81,7 @@ func namespaces(clientset *kubernetes.Clientset) []string {
 func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 
 	JsonEvents := FileEvent{}
-
+	finaljson := JSON{}
 	Array := []FileEvent{}
 	EventArray := []Event{}
 
@@ -95,7 +95,9 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 		EventArray = []Event{}
 	}
 
-	JSON, _ := json.Marshal(Array)
+	finaljson = JSON{Items: Array}
+
+	JSON, _ := json.Marshal(finaljson)
 
 	fileTime := fmt.Sprint(time.Now().Year()) + "-" + fmt.Sprint(time.Now().Month()) + "-" + fmt.Sprint(time.Now().Day()) + "-" + fmt.Sprint(time.Now().Hour()) + "-" + fmt.Sprint(time.Now().Minute()) + "-" + fmt.Sprint(time.Now().Second())
 

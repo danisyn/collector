@@ -6,7 +6,7 @@ echo "Commit message: "
 
 read message
 
-git commmit -m $message
+git commit -m $message
 
 git push origin main
 
