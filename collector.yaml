@@ -82,7 +82,7 @@ spec:
         image: daniels7/collector:latest
         imagePullPolicy: Always
         volumeMounts:
-        - name: logs
+        - name: collector-pvc
           mountPath: /app/logs
         resources:
           limits:
