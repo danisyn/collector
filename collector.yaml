@@ -85,12 +85,12 @@ spec:
         volumeMounts:
         - name: log-volume
           mountPath: /app/logs
-      volumes: 
-      - name: log-volume
-        persistentVolumeClaim:
-          claimName: collector-pvc
         resources:
           limits:
             cpu: 200m
             memory: 300M
+      volumes: 
+      - name: log-volume
+        persistentVolumeClaim:
+          claimName: collector-pvc
       serviceAccount: collector  
