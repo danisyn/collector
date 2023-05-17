@@ -61,6 +61,7 @@ spec:
       containers:
       - name: syndeno-collector
         image: daniels7/collector:latest
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 200m
