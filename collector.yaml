@@ -83,8 +83,12 @@ spec:
         image: daniels7/collector:latest
         imagePullPolicy: Always
         volumeMounts:
-        - name: collector-pvc
+        - name: log-volume
           mountPath: /app/logs
+      volumes: 
+      - name: log-volume
+        persistentVolumeClaim:
+          claimName: collector-pvc
         resources:
           limits:
             cpu: 200m
