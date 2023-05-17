@@ -54,6 +54,9 @@ func main() {
 			ns := namespaces(clientset)
 
 			eventCollector(clientset, ns)
+
+			length := needsCompress()
+			fmt.Println(length)
 		}()
 	}
 
@@ -98,11 +101,31 @@ func eventCollector(clientset *kubernetes.Clientset, ns []string) {
 
 	defer file.Close()
 
-	_, err := file.WriteString(fmt.Sprint(JSON))
+	_, err := file.WriteString(string(JSON))
 	if err != nil {
         fmt.Println(err)
     }
 
 	fmt.Println("Kubernetes event log " + fileName + " created")
 
+}
+
+func needsCompress() int{
+
+	dirLength := []int{}
+
+	dir, err := os.Open("/app/log")
+	if err != nil {
+		fmt.Println("[ERROR]: Can't open directory /app/log")
+	}
+
+	files, _ := dir.ReadDir(0)
+
+	for i := range files {
+		dirLength = append(dirLength, i)
+	}
+
+	length := len(dirLength)
+
+	return length
 }
