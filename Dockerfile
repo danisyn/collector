@@ -4,9 +4,7 @@ WORKDIR /app
 
 RUN mkdir logs
 
-RUN mkdir logs/
-
-RUN mkdir compress/
+RUN mkdir compress
 
 COPY go.mod ./
 

@@ -56,7 +56,11 @@ func main() {
 			eventCollector(clientset, ns)
 
 			length := needsCompress()
-			fmt.Println(length)
+			
+			if length == 99 {
+				
+			}
+
 		}()
 	}
 
