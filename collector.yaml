@@ -17,6 +17,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: collector-pvc
+  namespace: syndeno-collector
   labels:
     app: syndeno-collector
 spec:
