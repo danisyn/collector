@@ -12,6 +12,22 @@ metadata:
   namespace: syndeno-collector
 
 ---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: collector-pvc
+  labels:
+    app: syndeno-collector
+spec:
+  storageClassName: gp2
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+
+---
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -40,15 +56,17 @@ roleRef:
 ---
 
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: syndeno-collector
   labels:
     app: syndeno-collector
+    developer: danisyn
     language: go
     function: kubernetes-event-collector
   namespace: syndeno-collector
 spec:
+  serviceName: syndeno-collector
   replicas: 1
   selector:
     matchLabels:
@@ -62,6 +80,9 @@ spec:
       - name: syndeno-collector
         image: daniels7/collector:latest
         imagePullPolicy: Always
+        volumeMounts:
+        - name: logs
+          mountPath: /app/logs
         resources:
           limits:
             cpu: 200m
