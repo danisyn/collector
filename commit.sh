@@ -2,11 +2,9 @@
 
 git add .
 
-echo "Commit message: "
+read -p "Commit message: " message
 
-read message
-
-git commit -m $message
+git commit -m "$message"
 
 git push origin main
 

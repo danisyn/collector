@@ -58,7 +58,7 @@ func main() {
 			length := needsCompress()
 			
 			if length == 99 {
-
+				fmt.Println("Compress files")
 			}
 
 		}()
@@ -120,9 +120,9 @@ func needsCompress() int{
 
 	dirLength := []int{}
 
-	dir, err := os.Open("/app/log")
+	dir, err := os.Open("/app/logs")
 	if err != nil {
-		fmt.Println("[ERROR]: Can't open directory /app/log")
+		fmt.Println("[ERROR]: Can't open directory /app/logs")
 	}
 
 	files, _ := dir.ReadDir(0)
